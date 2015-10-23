@@ -1,4 +1,4 @@
-RSpec.describe "Grid" do
+RSpec.describe "::Grid" do
 	before :each do
 		@grid = Grid.new(14, 14)
 		@grid.create_grid
@@ -6,17 +6,21 @@ RSpec.describe "Grid" do
 	end
 
 	describe "#create_grid" do
-		it "creates a grid" do
-			expect(@grid.current_grid.length).to eq(14)
+		context "when game begins" do
+			it "creates a grid" do
+				expect(@grid.current_grid.length).to eq(14)
+			end
 		end
 
-		it "finds a cell in any square" do
-			expect(@grid.current_grid[rand(13)][rand(13)]).to be_instance_of(Cell)
-		end
+		context "when the board gets cells" do
+			it "finds a cell in any square" do
+				expect(@grid.current_grid[rand(13)][rand(13)]).to be_instance_of(Cell)
+			end
 
-		it "shows the grid owns the cells" do
-			check_cell = @grid.current_grid[0][0]
-			expect(@grid.controlled_cells.find { |cell| cell == check_cell }).to be_truthy
+			it "shows the grid owns the cells" do
+				check_cell = @grid.current_grid[0][0]
+				expect(@grid.controlled_cells.find { |cell| cell == check_cell }).to be_truthy
+			end
 		end
 	end
 
@@ -27,7 +31,7 @@ RSpec.describe "Grid" do
 	end
 
 	describe "#refresh_board" do
-		it "refreshes the board" do
+		it "returns a new board" do
 			@grid.refresh_grid
 			expect(@grid.current_grid.length).to eq(14)
 		end

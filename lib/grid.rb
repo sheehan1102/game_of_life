@@ -57,17 +57,14 @@ class Grid
 	end
 
 	def check_neighborhood(cell)
-		x = cell.coordinates.first
-		y = cell.coordinates.last
+		x, y = cell.coordinates.first, cell.coordinates.last
 		neighborhood = 0
-		ticker = 0
 		DIRECTIONS.each do |direction|
 			new_x = x + direction.first
 			new_y = y + direction.last
 			if (new_x >= 0 && new_x < @width) && (new_y >= 0 && new_y < @height)
 				neighbor = @controlled_cells.find { |cell| cell.coordinates == [new_x,new_y] }
 				neighborhood += neighbor.state
-				ticker += 1
 			end
 		end
 		neighborhood
